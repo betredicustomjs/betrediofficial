@@ -1668,22 +1668,6 @@
 
             $(this).empty().append(newButton);
           });
-
-          function injectVipImage() {
-            if (
-              window.location.pathname === "/tr/vip/" &&
-              document.querySelector("#main__content") &&
-              !document.querySelector("#vip-image-injected")
-            ) {
-              const div = document.createElement("div");
-              div.id = "vip-image-injected";
-              div.innerHTML = `<img src="https://resmim.net/cdn/2025/07/15/XZN9Q8.png" style="width: 100%">`;
-              const mainContent = document.querySelector("#main__content");
-              mainContent.insertBefore(div, mainContent.firstChild);
-            }
-          }
-
-          setInterval(injectVipImage, 1000);
         });
       }
     }, 300);
@@ -1697,6 +1681,20 @@
     function removeHomePageWidgets() {
       if (!isHomePageCheck()) {
         $(".manually-added-home-widgets").remove();
+      }
+    }
+
+    function injectVipImage() {
+      if (
+        window.location.pathname === "/tr/vip/" &&
+        document.querySelector("#main__content") &&
+        !document.querySelector("#vip-image-injected")
+      ) {
+        const div = document.createElement("div");
+        div.id = "vip-image-injected";
+        div.innerHTML = `<img src="https://resmim.net/cdn/2025/07/15/XZN9Q8.png" style="width: 100%">`;
+        const mainContent = document.querySelector("#main__content");
+        mainContent.insertBefore(div, mainContent.firstChild);
       }
     }
 
@@ -2323,6 +2321,8 @@
 
       slot_games = getSlotGames();
       casino_games = getCasinoGames();
+
+      injectVipImage();
 
       if ($(".form__btn span").text().trim() === "Send Request") {
         $(".form__btn span").text("Talep Gönder");
