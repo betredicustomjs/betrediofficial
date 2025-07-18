@@ -1905,7 +1905,9 @@
           window.location.pathname === "/tr/vip/" &&
           vipDiv &&
           !document.querySelector("#vip-image-injected")
-        ) {
+        )
+          alert(true);
+        {
           vipDiv.innerHTML = `<img id="vip-image-injected" src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png" style="width: 100%">`;
           clearInterval(interval);
         }
