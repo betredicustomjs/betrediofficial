@@ -1693,7 +1693,7 @@
         !document.querySelector("#vip-image-injected")
       ) {
         const vipDiv = document.querySelector(".vip");
-        vipDiv.innerHTML = `<img id="vip-image-injected" src="https://betredicustomjs/betrediofficial/images/vip/vip.png" style="width: 100%">`;
+        vipDiv.innerHTML = `<img id="vip-image-injected" src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png" style="width: 100%">`;
       }
     }
 
