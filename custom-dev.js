@@ -1685,8 +1685,6 @@
     }
 
     function injectVipImage() {
-      alert(`PATHNAME: ${window.location.pathname}`);
-
       if (
         window.location.pathname === "/tr/vip/" &&
         document.querySelector(".vip") &&
