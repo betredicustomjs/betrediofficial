@@ -2024,8 +2024,6 @@
           return;
         }
 
-        // EMPTY
-
         if (!vipDiv && !alreadyInjected) {
           const newVipDiv = document.createElement("div");
           newVipDiv.className = "vip";

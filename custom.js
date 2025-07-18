@@ -1882,27 +1882,159 @@
       // $("#game-chooser").before(miniGamesSection);
     }
 
+    // function injectVipImageLoop() {
+    //   const interval = setInterval(() => {
+    //     const vipDiv = document.querySelector(".vip");
+
+    //     if (
+    //       window.location.pathname === "/tr/vip/" &&
+    //       vipDiv &&
+    //       !document.querySelector("#vip-image-injected")
+    //     )
+    //       alert(true);
+    //     {
+    //       vipDiv.innerHTML = `<img id="vip-image-injected" src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png" style="width: 100%">`;
+
+    //       // vipDiv.style.padding = "0";
+    //       // vipDiv.style.margin = "0";
+    //       // vipDiv.sttyle.border = "none";
+
+    //       vipDiv.style.setProperty("padding", "0", "important");
+    //       vipDiv.style.setProperty("margin", "0", "important");
+    //       vipDiv.style.setProperty("border", "none", "important");
+
+    //       clearInterval(interval);
+    //     }
+    //   }, 300);
+    // }
+
+    // function injectVipImageLoop() {
+    //   const interval = setInterval(() => {
+    //     if (
+    //       window.location.pathname !== "/tr/vip/" ||
+    //       window.location.pathname !== "/en/vip/"
+    //     )
+    //       return;
+
+    //     const containers = document.querySelectorAll(".container");
+    //     let correctContainer = null;
+    //     let rowInside = null;
+
+    //     containers.forEach((container) => {
+    //       const row = container.querySelector(".row");
+    //       if (row && !correctContainer) {
+    //         correctContainer = container;
+    //         rowInside = row;
+    //       }
+    //     });
+
+    //     if (!correctContainer || !rowInside) return;
+
+    //     const alreadyInjected = document.querySelector("#vip-image-injected");
+    //     const vipDiv = correctContainer.querySelector(".vip");
+
+    //     if (vipDiv && !alreadyInjected) {
+    //       vipDiv.innerHTML = `
+    //     <img id="vip-image-injected"
+    //          src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png"
+    //          style="width: 100%; height: auto; object-fit: cover; display: block;">
+    //   `;
+    //       clearInterval(interval);
+    //       return;
+    //     }
+
+    //     if (!vipDiv && !alreadyInjected) {
+    //       const newVipDiv = document.createElement("div");
+    //       newVipDiv.className = "vip";
+
+    //       newVipDiv.innerHTML = `
+    //     <img id="vip-image-injected"
+    //          src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png"
+    //          style="width: 100%; height: auto; object-fit: cover; display: block;">
+    //   `;
+
+    //       rowInside.parentNode.insertBefore(newVipDiv, rowInside);
+    //       clearInterval(interval);
+    //     }
+    //   }, 300);
+    // }
+
     function injectVipImageLoop() {
       const interval = setInterval(() => {
-        const vipDiv = document.querySelector(".vip");
+        const path = window.location.pathname;
+        if (!["/tr/vip/", "/en/vip/"].includes(path)) return;
 
-        if (
-          window.location.pathname === "/tr/vip/" &&
-          vipDiv &&
-          !document.querySelector("#vip-image-injected")
-        )
-          alert(true);
-        {
-          vipDiv.innerHTML = `<img id="vip-image-injected" src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png" style="width: 100%">`;
+        const alreadyInjected = document.querySelector("#vip-image-injected");
+        if (alreadyInjected) {
+          clearInterval(interval);
+          return;
+        }
 
-          // vipDiv.style.padding = "0";
-          // vipDiv.style.margin = "0";
-          // vipDiv.sttyle.border = "none";
+        const userProgress = document.querySelector("#vip-user-progress");
 
-          vipDiv.style.setProperty("padding", "0", "important");
-          vipDiv.style.setProperty("margin", "0", "important");
-          vipDiv.style.setProperty("border", "none", "important");
+        if (userProgress) {
+          const parentContainer = userProgress.closest(".container");
+          const row = parentContainer?.querySelector(".row");
 
+          if (
+            parentContainer &&
+            row &&
+            !parentContainer.querySelector(".vip")
+          ) {
+            const newVipDiv = document.createElement("div");
+            newVipDiv.className = "vip";
+            newVipDiv.style.padding = "0px";
+            newVipDiv.style.margin = "0px";
+            newVipDiv.style.border = "none";
+            newVipDiv.innerHTML = `
+          <img id="vip-image-injected"
+               src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png"
+               style="width: 100%; height: auto; object-fit: cover; display: block;">
+        `;
+            row.parentNode.insertBefore(newVipDiv, row);
+            clearInterval(interval);
+          }
+
+          return;
+        }
+
+        const containers = document.querySelectorAll(".container");
+        let correctContainer = null;
+        let rowInside = null;
+
+        containers.forEach((container) => {
+          const row = container.querySelector(".row");
+          if (row && !correctContainer) {
+            correctContainer = container;
+            rowInside = row;
+          }
+        });
+
+        if (!correctContainer || !rowInside) return;
+
+        const vipDiv = correctContainer.querySelector(".vip");
+
+        if (vipDiv && !alreadyInjected) {
+          vipDiv.innerHTML = `
+        <img id="vip-image-injected"
+             src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png"
+             style="width: 100%; height: auto; object-fit: cover; display: block;">
+      `;
+          clearInterval(interval);
+          return;
+        }
+
+        if (!vipDiv && !alreadyInjected) {
+          const newVipDiv = document.createElement("div");
+          newVipDiv.className = "vip";
+
+          newVipDiv.innerHTML = `
+        <img id="vip-image-injected"
+             src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png"
+             style="width: 100%; height: auto; object-fit: cover; display: block;">
+      `;
+
+          rowInside.parentNode.insertBefore(newVipDiv, rowInside);
           clearInterval(interval);
         }
       }, 300);
