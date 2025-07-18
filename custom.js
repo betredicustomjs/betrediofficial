@@ -1894,6 +1894,15 @@
           alert(true);
         {
           vipDiv.innerHTML = `<img id="vip-image-injected" src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png" style="width: 100%">`;
+
+          // vipDiv.style.padding = "0";
+          // vipDiv.style.margin = "0";
+          // vipDiv.sttyle.border = "none";
+
+          vipDiv.style.setProperty("padding", "0", "important");
+          vipDiv.style.setProperty("margin", "0", "important");
+          vipDiv.style.setProperty("border", "none", "important");
+
           clearInterval(interval);
         }
       }, 300);
