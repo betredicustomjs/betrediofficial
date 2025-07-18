@@ -3236,6 +3236,12 @@ ${
     transform: translateX(3px);
   }
 
+  .vip {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+  }
+
   @media screen and (min-width: 1200px) {
     #floating-payment {
       margin-top: 38px;
