@@ -1910,12 +1910,28 @@
 
     function injectVipImageLoop() {
       const interval = setInterval(() => {
-        if (window.location.pathname !== "/tr/vip/") return;
+        if (
+          window.location.pathname !== "/tr/vip/" ||
+          window.location.pathname !== "/en/vip/"
+        )
+          return;
 
-        const container = document.querySelector(".container");
-        const row = container?.querySelector(".row");
-        const vipDiv = container?.querySelector(".vip");
+        const containers = document.querySelectorAll(".container");
+        let correctContainer = null;
+        let rowInside = null;
+
+        containers.forEach((container) => {
+          const row = container.querySelector(".row");
+          if (row && !correctContainer) {
+            correctContainer = container;
+            rowInside = row;
+          }
+        });
+
+        if (!correctContainer || !rowInside) return;
+
         const alreadyInjected = document.querySelector("#vip-image-injected");
+        const vipDiv = correctContainer.querySelector(".vip");
 
         if (vipDiv && !alreadyInjected) {
           vipDiv.innerHTML = `
@@ -1923,21 +1939,21 @@
              src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png"
              style="width: 100%; height: auto; object-fit: cover; display: block;">
       `;
-
           clearInterval(interval);
           return;
         }
 
-        if (!vipDiv && row && !alreadyInjected) {
+        if (!vipDiv && !alreadyInjected) {
           const newVipDiv = document.createElement("div");
           newVipDiv.className = "vip";
+
           newVipDiv.innerHTML = `
         <img id="vip-image-injected"
              src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png"
              style="width: 100%; height: auto; object-fit: cover; display: block;">
       `;
 
-          row.parentNode.insertBefore(newVipDiv, row);
+          rowInside.parentNode.insertBefore(newVipDiv, rowInside);
           clearInterval(interval);
         }
       }, 300);
