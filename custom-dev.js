@@ -1897,23 +1897,19 @@
       // $("#game-chooser").before(miniGamesSection);
     }
 
-    function injectVipImage() {
-      const vipDiv = document.querySelector(".vip");
-      if (
-        window.location.pathname === "/tr/vip/" &&
-        vipDiv &&
-        !document.querySelector("#vip-image-injected")
-      ) {
-        vipDiv.innerHTML = `<img id="vip-image-injected" src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png" style="width: 100%">`;
-      }
-    }
+    function injectVipImageLoop() {
+      const interval = setInterval(() => {
+        const vipDiv = document.querySelector(".vip");
 
-    function observeVipImage() {
-      const vipObserver = new MutationObserver(() => {
-        injectVipImage();
-      });
-
-      vipObserver.observe(document.body, { childList: true, subtree: true });
+        if (
+          window.location.pathname === "/tr/vip/" &&
+          vipDiv &&
+          !document.querySelector("#vip-image-injected")
+        ) {
+          vipDiv.innerHTML = `<img id="vip-image-injected" src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png" style="width: 100%">`;
+          clearInterval(interval);
+        }
+      }, 300);
     }
 
     function initCustomMiniGamesSlider() {
@@ -2342,9 +2338,11 @@
       slot_games = getSlotGames();
       casino_games = getCasinoGames();
 
-      observeVipImage();
+      // observeVipImage();
 
       // injectVipImage();
+
+      injectVipImageLoop();
 
       if ($(".form__btn span").text().trim() === "Send Request") {
         $(".form__btn span").text("Talep Gönder");
