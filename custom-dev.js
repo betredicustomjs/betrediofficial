@@ -1684,20 +1684,20 @@
       }
     }
 
-    function injectVipImage() {
-      const vipDiv = document.querySelector(".vip");
-      if (
-        window.location.pathname === "/tr/vip/" &&
-        vipDiv &&
-        !document.querySelector("#vip-image-injected")
-      ) {
-        vipDiv.innerHTML = `<img id="vip-image-injected" src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png" style="width: 100%; display: block;">`;
-      }
-    }
+    // function injectVipImage() {
+    //   const vipDiv = document.querySelector(".vip");
+    //   if (
+    //     window.location.pathname === "/tr/vip/" &&
+    //     vipDiv &&
+    //     !document.querySelector("#vip-image-injected")
+    //   ) {
+    //     vipDiv.innerHTML = `<img id="vip-image-injected" src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png" style="width: 100%; display: block;">`;
+    //   }
+    // }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      setTimeout(injectVipImage, 500);
-    });
+    // document.addEventListener("DOMContentLoaded", () => {
+    //   setTimeout(injectVipImage, 500);
+    // });
 
     function removeOriginalMainSlider() {
       const firstSection = document.querySelector("#main__content .section");
@@ -1895,6 +1895,25 @@
 
       pragmaticSliderSection.after(miniGamesSection);
       // $("#game-chooser").before(miniGamesSection);
+    }
+
+    function injectVipImage() {
+      const vipDiv = document.querySelector(".vip");
+      if (
+        window.location.pathname === "/tr/vip/" &&
+        vipDiv &&
+        !document.querySelector("#vip-image-injected")
+      ) {
+        vipDiv.innerHTML = `<img id="vip-image-injected" src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png" style="width: 100%">`;
+      }
+    }
+
+    function observeVipImage() {
+      const vipObserver = new MutationObserver(() => {
+        injectVipImage();
+      });
+
+      vipObserver.observe(document.body, { childList: true, subtree: true });
     }
 
     function initCustomMiniGamesSlider() {
@@ -2323,7 +2342,9 @@
       slot_games = getSlotGames();
       casino_games = getCasinoGames();
 
-      injectVipImage();
+      observeVipImage();
+
+      // injectVipImage();
 
       if ($(".form__btn span").text().trim() === "Send Request") {
         $(".form__btn span").text("Talep Gönder");
