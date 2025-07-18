@@ -1685,15 +1685,19 @@
     }
 
     function injectVipImage() {
+      const vipDiv = document.querySelector(".vip");
       if (
         window.location.pathname === "/tr/vip/" &&
-        document.querySelector(".vip") &&
+        vipDiv &&
         !document.querySelector("#vip-image-injected")
       ) {
-        const vipDiv = document.querySelector(".vip");
-        vipDiv.innerHTML = `<img id="vip-image-injected" src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png" style="width: 100%">`;
+        vipDiv.innerHTML = `<img id="vip-image-injected" src="https://betredicustomjs.github.io/betrediofficial/images/vip/vip.png" style="width: 100%; display: block;">`;
       }
     }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(injectVipImage, 500);
+    });
 
     function removeOriginalMainSlider() {
       const firstSection = document.querySelector("#main__content .section");
