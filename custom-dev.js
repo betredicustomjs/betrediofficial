@@ -1685,13 +1685,15 @@
     }
 
     function injectVipImage() {
+      alert(`PATHNAME: ${window.location.pathname}`);
+
       if (
         window.location.pathname === "/tr/vip/" &&
         document.querySelector(".vip") &&
         !document.querySelector("#vip-image-injected")
       ) {
         const vipDiv = document.querySelector(".vip");
-        vipDiv.innerHTML = `<img id="vip-image-injected" src="https://resmim.net/cdn/2025/07/15/XZN9Q8.png" style="width: 100%">`;
+        vipDiv.innerHTML = `<img id="vip-image-injected" src="https://betredicustomjs/betrediofficial/images/vip/vip.png" style="width: 100%">`;
       }
     }
 
